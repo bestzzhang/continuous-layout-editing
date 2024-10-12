@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    
+body, html
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  background-color: #38444d;
+}
+
+li {
+  float: left;
+  border-right: 1px solid #bbb;
+  font-size: 34px;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: rgba(147, 171, 150, 0.987);
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #a1a0a0;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+
+<ul>
+    <li><a href="files/results/index.html" target="displayframe">More Results</a></li>
+
+    <li><a href="files/user_study/index.html", target="displayframe">User Study</a></li>
+</ul>
+
+
+<iframe src="files/results/index.html" name="displayframe" frameborder="0" style="position: absolute; height: 90%; border: none; width: 100%;"></iframe>
+
+
+
+</body>
+</html>
+
+

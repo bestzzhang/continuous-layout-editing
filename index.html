@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+  <title>continuous-layout-editing</title>
+  <meta name="generator" content="Jekyll v3.9.2" />
+  <meta property="og:title" content="continuous-layout-editing" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="continuous-layout-editing" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","headline":"continuous-layout-editing","url":"http://localhost:4000/continuous-layout-editing/"}</script>
+  <!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="continuous-layout-editing" />
+  <link rel="stylesheet" href="fancybox/fancybox.css" />
+</head>
+
+
+<body>
+
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+
+<!--Content starts here-->
+
+  <div class="post-content">
+    <h1><center>Continuous Layout Editing of Single Images with Diffusion Models</center></h2>
+
+<center> Zhiyuan Zhang\(^{1*}\),  Zhitong Huang\(^{1*}\) ,  <a href="https://liaojing.github.io/html/">Jing Liao</a>\(^{1 \dagger}\) </center>
+
+<p><center><sub>
+\(^1\): City University of Hong Kong, Hong Kong SAR, China 
+</sub>
+<br />
+<sub>
+\(^*\) : Both authors contributed equally to this research \(^\dagger\) : Corresponding author
+</center></sub></p>
+
+<h4><center> <a href="https://arxiv.org/abs/2306.13078"><strong>Paper</strong></a> (<a href="javascript:to_highres();">HighRes</a> | <a href="javascript:to_lowres();">LowRes</a>)| 
+  <a href="javascript:to_supplementary();"><strong>Supplementary</strong></a> | 
+  <a href="https://github.com/bestzzhang/continuous-layout-editing-code"><strong>Code</strong></a> </center></h4>
+
+<div class="card">
+<h3>Video</h3>
+<div>
+  <div style="position:relative;padding-top:56.25%;">
+    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/x3vU6pQaJlQ" frameborder="0" allow="fullscreen;"> </iframe>
+  </div>
+</div>
+</div>
+
+<br>
+
+<div class="card">
+<h3>Abstract</h3>
+<p> <a style="cursor:pointer;" data-fancybox data-src="figures/teaser.png"> <img src="figures/teaser.png" title="Click to zoom."> </a> </p>
+<p>Recent advancements in large-scale text-to-image diffusion models have enabled many applications in image editing. However, none of these methods have been able to edit the layout of single existing images. To address this gap, we propose the first framework for layout editing of a single image while preserving its visual properties, thus allowing for continuous editing on a single image. Our approach is achieved through two key modules. First, to preserve the characteristics of multiple objects within an image, we disentangle the concepts of different objects and embed them into separate textual tokens using a novel method called masked textual inversion. Next, we propose a training-free optimization method to perform layout control for a pre-trained diffusion model, which allows us to regenerate images with learned concepts and align them with user-specified layouts. As the first framework to edit the layout of existing images, we demonstrate that our method is effective and outperforms other baselines that were modified to support this task. Our code will be freely available for public use upon acceptance.</p>
+</div>
+
+
+<h3>Methods</h3>
+<div class="slideshow-container">
+  <div class="mySlides0 fade">
+    <div class="card">
+      <div><strong>Learn Concepts of Multiple Objects within Single Image</strong></div>
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/overall_structure.png" data-caption=""> <img class="img" src="figures/overall_structure.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Our methods can be divided into two stages.
+          In the first stage, we learn the concepts of multiple objects from a single input 
+          image \(\it I\) into text tokens \(\it v\)\(_{1}\), \(\it v\)\(_{2}\), ..., \(\it v\)\(_{N}\) with masked textual inversion, 
+          where the region of each object is specified by mask \(\it M\)\(_{1}\), \(\it M\)\(_{2}\), ..., \(\it M\)\(_{N}\). 
+          We further learn the details of the objects by finetuning the diffusion model  \({\epsilon}_{\theta}\) 
+          and optimizing the appended tokens  \(\it v\)\(_{[1]}\), ..., \(\it v\)\(_{[L]}\). 
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides0 fade">
+    <div class="card">
+      <div><strong>Training-Free Layout Editing</strong></div>
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/loss.png" data-caption=""> <img class="img" src="figures/loss.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          After the first stage, 
+          we get the optimized text tokens for objects \(\it y\)\(_{*}\) = \([\it v\)\(_{1*}\), ..., \(\it v\)\(_{N*}]\) and the finetuned model \({\epsilon}_{\theta*}\).
+          In the second stage, we rearrange the positions of the objects according to the user-specified 
+         layout map \(\it I\)\(_{L}\) through a training-free layout editing method with iterative optimization.
+        </div>
+    </div>
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(0, -1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(0, 1)">&#10095;</a>
+</div>
+<br>
+
+
+<h3>Comparison and Application</h3>
+<div class="slideshow-container">
+  <div class="mySlides1 fade">
+    <div class="card">
+      <div><strong>Comparison</strong></div>
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/comparison.png" data-caption=""> <img class="img" src="figures/comparison.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Qualitative comparison with other baseline methods. From left to right: (a) Input images; (b) Target layout; (c) Image-level manipulation; (d) Latent-level manipulation; (e) GLIGEN + textual inversion; (f) MultiDiffusion + Dreambooth; (g) Ours
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides1 fade">
+    <div class="card">
+      <div><strong>Application</strong></div>
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/application.png" data-caption=""> <img class="img" src="figures/application.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Continuous layout editing with different target layouts
+        </div>
+    </div>
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(1, -1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+</div>
+<br>
+
+
+<h3>Ablation Study</h3>
+<div class="slideshow-container">
+  <div class="mySlides2 fade">
+    <div class="card">
+      <!-- <div><strong>Comparison</strong></div> -->
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/abl_mask.png" data-caption=""> <img class="img" src="figures/abl_mask.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Ablation study on different textual inversion methods. From left to right: (a) Input images; (b) Target layouts; (c) Inversion with Dreambooth; (d) Textual inversion + finetune; (e) Masked textual inversion w/o finetune; (f) Our full inversion method with masked textual inversion and finetune.
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides2 fade">
+    <div class="card">
+      <!-- <div><strong>Application</strong></div> -->
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/abl_model.png" data-caption=""> <img class="img" src="figures/abl_model.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Ablation study on differen layout control methods. From left to right: (a) Input images; (b) Target layouts; (c) Our inversion + ControlNet; (d) Our inversion + GLIGEN; (e) Our inversion + MultiDiffusion; (f) Our full methods.
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides2 fade">
+    <div class="card">
+      <!-- <div><strong>Application</strong></div> -->
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/abl_loss.png" data-caption=""> <img class="img" src="figures/abl_loss.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Ablation study on optimization loss of layout control.
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides2 fade">
+    <div class="card">
+      <!-- <div><strong>Application</strong></div> -->
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/abl_iter.png" data-caption=""> <img class="img" src="figures/abl_iter.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Ablation study on iterative optimization. The number above the image indicates the denoising step on which iterative optimization is applied. If more than one number is labeled, iterative optimization is applied to multiple denoising steps.
+        </div>
+    </div>
+  </div>
+
+  <div class="mySlides2 fade">
+    <div class="card">
+      <!-- <div><strong>Application</strong></div> -->
+        <p> <a style="cursor:pointer;" data-fancybox data-src="figures/abl_blend.png" data-caption=""> <img class="img" src="figures/abl_blend.png" title="Click for details."> </a> </p>
+        <div style="text-align: center;">
+          Ablation study on blending steps. The number above the image indicates the number of steps where blending is applied.
+        </div>
+    </div>
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(2, -1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(2, 1)">&#10095;</a>
+</div>
+<br>
+
+
+
+<!--Content ends here-->
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<!-- Fancybox -->
+<script src="fancybox/fancybox.umd.js"></script>
+<script>
+  Fancybox.bind('[data-fancybox]', {
+    infinite: false,
+    Thumbs: {
+      autoStart: false,
+    },
+  });
+</script>
+
+<!-- Javascript Functions -->
+<script type = "text/javascript">
+  function to_supplementary() {
+    origin = window.location.origin;
+    window.location.href = origin + '/supplementary/supplementary.html';
+  }
+
+  function to_highres() {
+    origin = window.location.origin;
+    window.location.href = origin + '/files/highres.pdf';
+  }
+
+  function to_lowres() {
+    origin = window.location.origin;
+    window.location.href = origin + '/files/lowres.pdf';
+  }
+
+  let slideIndex = [1, 1, 1];
+  showSlides(0, slideIndex[0]);
+  showSlides(1, slideIndex[1])
+  showSlides(2, slideIndex[2])
+
+  // Next/previous controls
+  function plusSlides(id, n) {
+    showSlides(id, slideIndex[id] += n);
+  }
+
+  // Thumbnail image controls
+  function currentSlide(id, n) {
+    showSlides(id, slideIndex[id] = n);
+  }
+
+  function showSlides(id, n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides"+id);
+    if (n > slides.length) {slideIndex[id] = 1}
+    if (n < 1) {slideIndex[id] = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndex[id]-1].style.display = "block";
+  }
+</script>
+
+
+</body>
+
+</html>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
